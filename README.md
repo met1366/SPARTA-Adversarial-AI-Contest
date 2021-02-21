@@ -60,4 +60,8 @@ We check for all the above mentioned requirements for computing the delta value.
     
 ### Getting Started
 
-Please take a look [here](startup_guide.md) for details about the Development Toolkit structure and start up guide.    
+Please take a look [here](dev_toolkit/startup_guide.md) for details about the Development Toolkit structure and start up guide.   
+
+### Submission Steps
+
+Please take a look [here](dev_toolkit/submission_steps.md) for details about your model submission.
