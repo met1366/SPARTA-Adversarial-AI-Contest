@@ -6,6 +6,7 @@ import time
 import torch
 from tqdm import tqdm
 
+FIXED_TARGET_LABEL = 17
 
 class AdversarialRunner:
     def __init__(self, task_wrapper, model, device, attack_method, save=False):
@@ -64,8 +65,8 @@ class AdversarialRunner:
             # Send the data and label to the device
             data, target = data.to(self.device), target.to(self.device)
             orig_gt_label = target
-            if self.attack_method.is_targeted_attack:
-                target = 17 * torch.ones_like(target)  # Here 17 is the fixed label
+            if self.attack_method.is_targeted_attack and self.task_wrapper.task_type == 'reid':
+                target = FIXED_TARGET_LABEL  * torch.ones_like(target)  # Here 17 is the fixed label
             # Forward pass the data through the model
             pred = self.model(data)
             # Get the count of all the matches
