@@ -56,7 +56,7 @@ def create_autoencoder_defence(parser, section, net, args, loss_fn, min_val, max
                                                            "AutoEncoderDefenceNetwork "
     attack_method = get_adversarial(model=net, args=args, loss_fn=loss_fn, type=attack_type, epsilon=epsilon,
                                     min_val=min_val, max_val=max_val)
-    defence = AutoEncoderAdversarialDefence(attack_method)
+    defence = AutoEncoderAdversarialDefence(attack_method, model=net)
     print(f"Using AutoEncoderAdversarialDefence")
     return defence
 

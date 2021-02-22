@@ -1,0 +1,10 @@
+# We use this file to avoid adding the dataset to our image
+data/
+.idea/
+logs/
+execution_results/
+.git/
+**/__pycache__/
+Dockerfile
+.dockerignore
+
