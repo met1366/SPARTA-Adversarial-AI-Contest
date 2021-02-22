@@ -6,9 +6,10 @@ from networks import DummyNetwork
 
 class AutoEncoderAdversarialDefence(AbstractDefence):
 
-    def __init__(self, attack_method):
+    def __init__(self, attack_method, model):
         super(AutoEncoderAdversarialDefence, self).__init__()
         self.attack_method = attack_method
+        self.model = model
 
     def forward(self, model, images, labels):
         """
@@ -38,7 +39,7 @@ class AutoEncoderAdversarialDefence(AbstractDefence):
         defence in the samples.
         :return: Scalar value to be added to the loss
         """
-        return model.additional_loss
+        return self.model.additional_loss
 
 
 if __name__ == '__main__':

@@ -1,8 +1,7 @@
 In this tutorial, we'll cover the process of submitting your results for official evaluation.
 Once your model has been evaluated officially, your scores will be added to the leaderboard.
 
-Before we begin, please register yourself by sending an email to <TODO: EMAIL ID>,
-We'll first get your model running on the hidden test set.
+Before we begin, please register yourself by sending an email to **register_aicontest@sec.in.tum.de**. 
 
 Please clearly mention whether you are participating in the Defence Attack track along with the subtask (Attribute
 Alteration or Targeted ReIdentification) you are participating in.
