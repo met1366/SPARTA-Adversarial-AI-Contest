@@ -107,6 +107,10 @@ def adv(args):
     adversarial_runner = AdversarialRunner(task_wrapper=adv_task_wrapper, model=network, device=device,
                                            attack_method=attack, save=True)
     orig, adv = adversarial_runner.get_perturbed_acc(FIXED_EPSILON_VALUE)
+    if attack.is_targeted_attack and adv_task_wrapper.task_type == 'reid':
+        targeted_factor = -1
+    else:
+        targeted_factor = 1
     print("Actual accuracy of the model %.2f" % orig)
     print("Perturbed accuracy of the model %.2f" % adv)
     final_score = (orig - adv) * attack._targeted 

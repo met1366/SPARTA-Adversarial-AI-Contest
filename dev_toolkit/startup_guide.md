@@ -1,7 +1,6 @@
+# Development toolkit for participants of adversarial SAFAIR AI contest
 
-# Development toolkit for participants of adversarial competition
-
-This is a development toolkit for the Sparta project
+This is a development toolkit for the Sparta SAFAIR program.
 
 This toolkit includes:
 
