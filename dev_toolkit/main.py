@@ -21,18 +21,18 @@ PERTURB_IMAGE_SAVE_LOCATION = "perturb_samples"
 def parse_args():
     """parse input arguments"""
     parser = argparse.ArgumentParser(description='adversarial ml')
-    parser.add_argument('--epochs', help='number of epochs to train', default=8, type=int)
-    parser.add_argument('--batch_size', help='Training batch size', type=int, default='32')
-    parser.add_argument('--mode', help='train/test/adv default:train', type=str,
+    parser.add_argument('--epochs', help='number of epochs to train. Default: 8', default=8, type=int)
+    parser.add_argument('--batch_size', help='Training batch size. Default: 32', type=int, default='32')
+    parser.add_argument('--mode', help='train/test/adv. Default:train', type=str,
                         default='train')
-    parser.add_argument('--task_type', help='reid/attr default:attr', type=str, default='attr')
+    parser.add_argument('--task_type', help='reid/attr. Default:attr', type=str, default='attr')
     parser.add_argument('--num_workers', help='data loader threads', type=int, default=4)
     parser.add_argument('--output_dir', help='Directory to save logs and model. Default: checkpoints/', type=str,
                         default='checkpoints/')
-    parser.add_argument('--model_number', help='Model to test final results on. Needed for test mode', type=int,
+    parser.add_argument('--model_number', help='Model to test final results on. Needed for test and adv mode. Default: 0', type=int,
                         default='0')
-    parser.add_argument('--lr', help='Learning rate of the model. Default 1e-3', type=float, default=1e-3)
-    parser.add_argument('--defence', help='If Some defence mechanism used', action='store_true')
+    parser.add_argument('--lr', help='Learning rate of the model. Default: 1e-3', type=float, default=1e-3)
+    parser.add_argument('--defence', help='Use a Defence method to train the model', action='store_true')
     args = parser.parse_args()
     return args
 
@@ -102,16 +102,14 @@ def adv(args):
     attack = get_adversarial(model=network, args=args, loss_fn=adv_task_wrapper.loss_fn,
                              save_location=PERTURB_IMAGE_SAVE_LOCATION, epsilon=FIXED_EPSILON_VALUE, min_val=adv_task_wrapper.min_val,
                              max_val=adv_task_wrapper.max_val)
+    if attack.is_targeted_attack:
+        assert args.task_type == 'reid', "Please use targeted attack only for Face ReIdentification task"
     adversarial_runner = AdversarialRunner(task_wrapper=adv_task_wrapper, model=network, device=device,
                                            attack_method=attack, save=True)
     orig, adv = adversarial_runner.get_perturbed_acc(FIXED_EPSILON_VALUE)
-    if attack.is_targeted_attack and adv_task_wrapper.task_type == 'reid':
-        targeted_factor = -1
-    else:
-        targeted_factor = 1
     print("Actual accuracy of the model %.2f" % orig)
     print("Perturbed accuracy of the model %.2f" % adv)
-    final_score = (orig - adv) * targeted_factor
+    final_score = (orig - adv) * attack._targeted 
     print(f"The final adversarial score is {final_score}")
 
 

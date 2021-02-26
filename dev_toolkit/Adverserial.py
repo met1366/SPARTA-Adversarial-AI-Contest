@@ -6,7 +6,13 @@ import time
 import torch
 from tqdm import tqdm
 
+# This Target label will be a different one in our final evaluation. 
 FIXED_TARGET_LABEL = 17
+
+# During final evaluation, we would have four hours to perform the entire evaluation.
+# We provide the code here on a per epoch basis which is for the particpants to play 
+# around and find potential bottle-necks.
+MAX_ALLOWED_EPOCH_TIME = 3000 # 50 min x 60 s = 3000 s
 
 class AdversarialRunner:
     def __init__(self, task_wrapper, model, device, attack_method, save=False):
@@ -46,11 +52,11 @@ class AdversarialRunner:
                 total += data.shape[0]
         return correct / total
 
-    def get_perturbed_acc(self, max_eps, max_allowed_time=30000):
+    def get_perturbed_acc(self, max_eps, max_allowed_time=MAX_ALLOWED_EPOCH_TIME):
         """
         Method used to get the final accuracy value for the perturbed samples.
         :param max_eps: The maximum perturbation allowed
-        :param max_allowed_time: if exceeded, all predictions are marked false
+        :param max_allowed_time: if exceeded, all predictions are assigned same value as the unperturbed prediction
         :return:
         """
         orig_correct = 0
@@ -65,8 +71,8 @@ class AdversarialRunner:
             # Send the data and label to the device
             data, target = data.to(self.device), target.to(self.device)
             orig_gt_label = target
-            if self.attack_method.is_targeted_attack and self.task_wrapper.task_type == 'reid':
-                target = FIXED_TARGET_LABEL  * torch.ones_like(target)  # Here 17 is the fixed label
+            if self.attack_method.is_targeted_attack:
+                target = FIXED_TARGET_LABEL  * torch.ones_like(target)  
             # Forward pass the data through the model
             pred = self.model(data)
             # Get the count of all the matches
