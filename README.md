@@ -1,4 +1,4 @@
-## Competition Structure
+## Contest Structure
 
 1. Participants are allowed to take on three tasks at the same time, but they cannot play for both
 "attack" and "defence" teams for the same task.
@@ -20,20 +20,20 @@ from trying to guess our test labels.
 1. TUM employees cannot participate in the contest.
 2. You must register for the contest with one valid email address. If you participate in the contest with multiple email addresses, you will be disqualified.
 3. The registration times are listed in the schedule section. If you register after the time periods, your evaluation will not be considered.
-4. The contest is divided into four separate tasks, Targeted Face Re-Identification (Attacks and Defense) and Face Attribute Alterations(Attacks and Defense). Participants can be part of either the Attack track or Defense track but not both. However, participants for the Attack track of Face Attribute Alteration can compete for the Defense track of Targeted Face Re-Identification (but not for Defence track of Face Attribute Alteration), and vice versa.
+4. The contest is divided into four separate tasks, Targeted Face Re-Identification (Attacks and Defence) and Face Attribute Alterations(Attacks and Defence). Participants can be part of either the Attack track or Defence track but not both. However, participants for the Attack track of Face Attribute Alteration can compete for the Defence track of Targeted Face Re-Identification (but not for Defence track of Face Attribute Alteration), and vice versa.
 5. Participants are required to release the code of their submissions as open-source to our cloud systems.
-6. Any legitimate input that is not classified by a model (e.g., an error is produced) will be counted as adversarial.
-7. If an attack fails to produce a misclassification of the sample (e.g., because it produces an error), we will register a worst-case adversarial instead (a uniform grey image).
-8. Each classifier must be stateless and act one image at a time. This rule is supposed to prevent strategies such as memorizing pre-attack images and classifying replayed versions at defense time.
-9. The decision of each classifier must be deterministic. In other words, the classifier decision must be the same for the same input at any point in time.
+6. A model submitted by the defence team should be capable of handling valid inputs. In case the model fails to classify the input due to some error in the model, we penalize the model by considering it as a failure to handle an adversarial example.
+7. The Attack team should produce an adversarial example in the gray-box setting. They can use model gradients to create adversarial perturbations. If the execution fails for a valid input example, due to some logical errors in the submission, we penalize the Attack team by skipping that example and assuming that the defence team was able to handle the perturbation without any misclassification.
+8. Although we use a hidden test set for evaluation, still each classifier must be stateless. It should not memorize the training images.
+9. The defence models should not produce random outputs for the same input at different points of time. Participants should make sure that their models are deterministic.
 10. The number of submissions is limited to three times throughout the contest period (we will select the best submission from the three).
 11. We have 1000 test samples which should be perturbed within 4 hours. If the time duration is exceeded, the perturbation process is interrupted and the team is penalized.
-12. The Attack teams will be ranked based on the amount of decrease in accuracy they cause. This ranking will be based on the highest value first. Defense teams will be ranked based on the decrease in their accuracy. The team which has maximum decrease will be placed last while the team having a minimum decrease in accuracy is ranked first. A separate ranking will be prepared for each of the four sub-tasks.
+12. The Attack teams will be ranked based on the amount of decrease in accuracy they cause. This ranking will be based on the highest value first. defence teams will be ranked based on the decrease in their accuracy. The team which has maximum decrease will be placed last while the team having a minimum decrease in accuracy is ranked first. A separate ranking will be prepared for each of the four sub-tasks.
 
 ## Procedure
 
 ### Initial Round
-For the competition, we will have two teams, one concerned with attacks while the other with defence.
+For the contest, we will have two teams, one concerned with attacks while the other with defence.
 ##### Attack
 For the attack submissions, we will have an initial round. Here, we will use a model trained based on Adversarial training using FGSM attacks. This model would be pitted against the attack-submissions. We will evaluate the decrease in accuracy of the model based on the attack. We refer to this decrease as the <b> delta </b> value. For instance, if the original accuracy of the model on the task was 80% and the perturbed samples decreased it to 60%, the delta score is 20.
  
