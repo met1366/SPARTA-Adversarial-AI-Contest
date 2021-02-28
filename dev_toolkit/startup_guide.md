@@ -5,9 +5,9 @@ This is a development toolkit for the Sparta SAFAIR program.
 This toolkit includes:
 
 * Dev dataset which participants can use for development and testing of their
-  attacks and defences
-* Sample adversarial attacks
-* Sample adversarial defences
+  attacks and defences.
+* Sample adversarial attacks.
+* Sample adversarial defences.
 * Tool to run attacks against defences and compute score.
 
 ## Installation
