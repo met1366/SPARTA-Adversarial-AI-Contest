@@ -118,7 +118,7 @@ Other attribute specific to the model can be included as well.
 
 The perturbations are computed using [infinity norm](https://en.wikipedia.org/wiki/Uniform_norm)
 
-### Project Structure
+### Dev Toolkit Structure
 
 In general, we structure the project as follows:-
 
