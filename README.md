@@ -54,6 +54,7 @@ For selecting the best attack method, we would select the attack method which ca
 2. We use L-inf norm for all the submissions
 3. We use 2 Nvidia GPUs (Titan X Pascal and GeForce GTX) with 12 GB VRAM. We have a 32 core AMD CPU with 128 GB RAM. The code shall be run using docker containers which would use Ubuntu:18.04 base image and cuda:10.1 with access to both the available GPUs.
 3. The adversarial sample generation process has an upper limit time of 4 hours (240 minutes) for 1000 samples.
+4. An attack should produce an image, ie. with discrete pixel values in {0,1,…, 255}.
 
 
 We check for all the above mentioned requirements for computing the delta value. For instance, in our `attacks` folder we have created an instance of CarliniWagnerL2 attack. Since L-inf < L2 , the samples generated would invariably violate condition 1 and as such, would be penalized. Please refer to the file `Adversarial.py` to see the steps in action. 
