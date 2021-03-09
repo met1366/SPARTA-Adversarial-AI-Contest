@@ -234,7 +234,7 @@ reduce the above command command to
 
 >>> python main.py
 
-since default operation mode is `train` and default task is `reid`
+since default operation mode is `train` and default task is `attr`
 
 We support two tasks currently.
 1. Targeted Re-identification
