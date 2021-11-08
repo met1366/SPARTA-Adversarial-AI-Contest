@@ -66,3 +66,6 @@ Please take a look [here](dev_toolkit/startup_guide.md) for details about the De
 ### Submission Steps
 
 Please take a look [here](dev_toolkit/submission_steps.md) for details about your model submission.
+
+## License:
+[GNU GPL v3](http://www.gnu.org/licenses/gpl.html)
