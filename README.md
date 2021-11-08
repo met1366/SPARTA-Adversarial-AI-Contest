@@ -1,3 +1,8 @@
+##SPARTA SAFAIR AI Contest
+
+Homepage: https://www.sec.in.tum.de/i20/projects/sparta-safair-ai-contest
+
+
 ## Contest Structure
 
 1. Participants are allowed to take on three tasks at the same time, but they cannot play for both
