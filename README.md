@@ -1,4 +1,4 @@
-##SPARTA SAFAIR AI Contest
+## SPARTA SAFAIR AI Contest
 
 Homepage: https://www.sec.in.tum.de/i20/projects/sparta-safair-ai-contest
 
